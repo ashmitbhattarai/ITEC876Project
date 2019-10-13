@@ -24,9 +24,11 @@ import numpy as np
 import torch
 from torch.utils.data import TensorDataset, DataLoader, RandomSampler, SequentialSampler
 
-from pytorch_pretrained_bert.tokenization import BertTokenizer
-from pytorch_pretrained_bert.modeling import BertForSequenceClassification
-from pytorch_pretrained_bert.optimization import BertAdam
+# from pytorch_pretrained_bert.tokenization import BertTokenizer
+# from pytorch_pretrained_bert.modeling import BertForSequenceClassification
+# from pytorch_pretrained_bert.optimization import BertAdam
+
+from transformers import *
 
 import absa_data_utils as data_utils
 from absa_data_utils import ABSATokenizer
@@ -47,7 +49,8 @@ def warmup_linear(x, warmup=0.002):
 def train(args):
     processor = data_utils.AscProcessor()
     label_list = processor.get_labels()
-    tokenizer = ABSATokenizer.from_pretrained(modelconfig.MODEL_ARCHIVE_MAP[args.bert_model])
+    tokenizer = ABSATokenizer.from_pretrained('bert-base-uncased')
+    # tokenizer = ABSATokenizer.from_pretrained(modelconfig.MODEL_ARCHIVE_MAP[args.bert_model])
     train_examples = processor.get_train_examples(args.data_dir)
     num_train_steps = int(len(train_examples) / args.train_batch_size) * args.num_train_epochs
 
@@ -91,8 +94,9 @@ def train(args):
         valid_losses=[]
     #<<<<< end of validation declaration
 
-    model = BertForSequenceClassification.from_pretrained(modelconfig.MODEL_ARCHIVE_MAP[args.bert_model], num_labels = len(label_list) )
-    model.cuda()
+    model = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels = len(label_list) )
+    # model = BertForSequenceClassification.from_pretrained(modelconfig.MODEL_ARCHIVE_MAP[args.bert_model], num_labels = len(label_list) )
+    #model.cuda()
     # Prepare optimizer
     param_optimizer = [(k, v) for k, v in model.named_parameters() if v.requires_grad==True]
     param_optimizer = [n for n in param_optimizer if 'pooler' not in n[0]]
@@ -100,9 +104,9 @@ def train(args):
     optimizer_grouped_parameters = [
         {'params': [p for n, p in param_optimizer if not any(nd in n for nd in no_decay)], 'weight_decay': 0.01},
         {'params': [p for n, p in param_optimizer if any(nd in n for nd in no_decay)], 'weight_decay': 0.0}
-        ]
+        ]x`
     t_total = num_train_steps
-    optimizer = BertAdam(optimizer_grouped_parameters,
+    optimizer = AdamW(optimizer_grouped_parameters,
                          lr=args.learning_rate,
                          warmup=args.warmup_proportion,
                          t_total=t_total)
@@ -113,7 +117,7 @@ def train(args):
         for step, batch in enumerate(train_dataloader):
             batch = tuple(t.cuda() for t in batch)
             input_ids, segment_ids, input_mask, label_ids = batch
-            loss = model(input_ids, segment_ids, input_mask, label_ids)
+            loss = model(input_ids, segment_ids, input_mask, label_ids)[0]
             loss.backward()
 
             lr_this_step = args.learning_rate * warmup_linear(global_step/t_total, args.warmup_proportion)
@@ -131,7 +135,7 @@ def train(args):
                 for step, batch in enumerate(valid_dataloader):
                     batch = tuple(t.cuda() for t in batch) # multi-gpu does scattering it-self
                     input_ids, segment_ids, input_mask, label_ids = batch
-                    loss = model(input_ids, segment_ids, input_mask, label_ids)
+                    loss = model(input_ids, segment_ids, input_mask, label_ids)[0]
                     losses.append(loss.data.item()*input_ids.size(0) )
                     valid_size+=input_ids.size(0)
                 valid_loss=sum(losses)/valid_size
@@ -168,7 +172,7 @@ def test(args):  # Load a trained model that you have fine-tuned (we assume eval
     eval_dataloader = DataLoader(eval_data, sampler=eval_sampler, batch_size=args.eval_batch_size)
 
     model = torch.load(os.path.join(args.output_dir, "model.pt") )
-    model.cuda()
+    #model.cuda()
     model.eval()
     
     full_logits=[]
@@ -178,7 +182,7 @@ def test(args):  # Load a trained model that you have fine-tuned (we assume eval
         input_ids, segment_ids, input_mask, label_ids = batch
         
         with torch.no_grad():
-            logits = model(input_ids, segment_ids, input_mask)
+            logits = model(input_ids, segment_ids, input_mask)[1]
 
         logits = logits.detach().cpu().numpy()
         label_ids = label_ids.cpu().numpy()

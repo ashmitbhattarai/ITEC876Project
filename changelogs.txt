@@ -1,0 +1,6 @@
+# BErt adadm
+# transformers change
+# need to add files and folder
+# add model bert-base-cased
+# the whole thing with model[0] for loss
+# whole change in toptimizer config https://github.com/huggingface/transformers#optimizers-bertadam--openaiadam-are-now-adamw-schedules-are-standard-pytorch-schedules
