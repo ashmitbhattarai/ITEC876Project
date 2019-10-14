@@ -1,76 +1,31 @@
-10/14/2019 12:20:20 - INFO - transformers.tokenization_utils -   loading file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased-vocab.txt from cache at /Users/ashmitbhattarai/.cache/torch/transformers/26bc1ad6c0ac742e9b52263248f6d0f00068293b33709fae12320c0e35ccfbbb.542ce4285a40d23a559526243235df47c5f75c197f04f37d1a0c124c32c9a084
-10/14/2019 12:20:21 - INFO - __main__ -   ***** Running training *****
-10/14/2019 12:20:21 - INFO - __main__ -     Num examples = 3452
-10/14/2019 12:20:21 - INFO - __main__ -     Batch size = 32
-10/14/2019 12:20:21 - INFO - __main__ -     Num steps = 428
-10/14/2019 12:20:21 - INFO - __main__ -   ***** Running validations *****
-10/14/2019 12:20:21 - INFO - __main__ -     Num orig examples = 150
-10/14/2019 12:20:21 - INFO - __main__ -     Num split examples = 150
-10/14/2019 12:20:21 - INFO - __main__ -     Batch size = 32
-10/14/2019 12:20:22 - INFO - transformers.configuration_utils -   loading configuration file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased-config.json from cache at /Users/ashmitbhattarai/.cache/torch/transformers/4dad0251492946e18ac39290fcfe91b89d370fee250efe9521476438fe8ca185.bf3b9ea126d8c0001ee8a1e8b92229871d06d36d8808208cc2449280da87785c
-10/14/2019 12:20:22 - INFO - transformers.configuration_utils -   Model config {
+10/14/2019 07:01:27 - INFO - pytorch_pretrained_bert.tokenization -   loading vocabulary file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased-vocab.txt from cache at /home/ashmitbhattarai/.pytorch_pretrained_bert/26bc1ad6c0ac742e9b52263248f6d0f00068293b33709fae12320c0e35ccfbbb.542ce4285a40d23a559526243235df47c5f75c197f04f37d1a0c124c32c9a084
+10/14/2019 07:01:28 - INFO - __main__ -   ***** Running training *****
+10/14/2019 07:01:28 - INFO - __main__ -     Num examples = 3452
+10/14/2019 07:01:28 - INFO - __main__ -     Batch size = 32
+10/14/2019 07:01:28 - INFO - __main__ -     Num steps = 432
+10/14/2019 07:01:29 - INFO - __main__ -   ***** Running validations *****
+10/14/2019 07:01:29 - INFO - __main__ -     Num orig examples = 150
+10/14/2019 07:01:29 - INFO - __main__ -     Num split examples = 150
+10/14/2019 07:01:29 - INFO - __main__ -     Batch size = 32
+10/14/2019 07:01:29 - INFO - pytorch_pretrained_bert.modeling -   loading archive file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased.tar.gz from cache at /home/ashmitbhattarai/.pytorch_pretrained_bert/9c41111e2de84547a463fd39217199738d1e3deb72d4fec4399e6e241983c6f0.ae3cef932725ca7a30cdcb93fc6e09150a55e2a130ec7af63975a16c153ae2ba
+10/14/2019 07:01:29 - INFO - pytorch_pretrained_bert.modeling -   extracting archive file /home/ashmitbhattarai/.pytorch_pretrained_bert/9c41111e2de84547a463fd39217199738d1e3deb72d4fec4399e6e241983c6f0.ae3cef932725ca7a30cdcb93fc6e09150a55e2a130ec7af63975a16c153ae2ba to temp dir /tmp/tmp0hjf7qha
+10/14/2019 07:01:33 - INFO - pytorch_pretrained_bert.modeling -   Model config {
   "attention_probs_dropout_prob": 0.1,
-  "finetuning_task": null,
   "hidden_act": "gelu",
   "hidden_dropout_prob": 0.1,
   "hidden_size": 768,
   "initializer_range": 0.02,
   "intermediate_size": 3072,
-  "layer_norm_eps": 1e-12,
   "max_position_embeddings": 512,
   "num_attention_heads": 12,
   "num_hidden_layers": 12,
-  "num_labels": 3,
-  "output_attentions": false,
-  "output_hidden_states": false,
-  "output_past": true,
-  "pruned_heads": {},
-  "torchscript": false,
   "type_vocab_size": 2,
-  "use_bfloat16": false,
   "vocab_size": 30522
 }
 
-10/14/2019 12:20:23 - INFO - transformers.modeling_utils -   loading weights file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased-pytorch_model.bin from cache at /Users/ashmitbhattarai/.cache/torch/transformers/aa1ef1aede4482d0dbcd4d52baad8ae300e60902e88fcb0bebdec09afd232066.36ca03ab34a1a5d5fa7bc3d03d55c4fa650fed07220e2eeebc06ce58d0e9a157
-10/14/2019 12:20:26 - INFO - transformers.modeling_utils -   Weights of BertForSequenceClassification not initialized from pretrained model: ['classifier.weight', 'classifier.bias']
-10/14/2019 12:20:26 - INFO - transformers.modeling_utils -   Weights from pretrained model not used in BertForSequenceClassification: ['cls.predictions.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.dense.bias', 'cls.predictions.decoder.weight', 'cls.seq_relationship.weight', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.LayerNorm.bias']
-torch.Size([32, 100]) torch.Size([32, 100]) torch.Size([32, 100])
-torch.Size([32, 100]) torch.Size([32, 100]) torch.Size([32, 100])
-torch.Size([32, 100]) torch.Size([32, 100]) torch.Size([32, 100])
-torch.Size([32, 100]) torch.Size([32, 100]) torch.Size([32, 100])
-torch.Size([32, 100]) torch.Size([32, 100]) torch.Size([32, 100])
-torch.Size([32, 100]) torch.Size([32, 100]) torch.Size([32, 100])
-Traceback (most recent call last):
-  File "../src/run_asc.py", line 286, in <module>
-    main()
-  File "../src/run_asc.py", line 281, in main
-    train(args)
-  File "../src/run_asc.py", line 127, in train
-    loss = model(input_ids, segment_ids, input_mask, labels=label_ids)[0]
-  File "/Users/ashmitbhattarai/anaconda3/envs/perceptyx/lib/python3.6/site-packages/torch/nn/modules/module.py", line 541, in __call__
-    result = self.forward(*input, **kwargs)
-  File "/Users/ashmitbhattarai/anaconda3/envs/perceptyx/lib/python3.6/site-packages/transformers/modeling_bert.py", line 897, in forward
-    head_mask=head_mask)
-  File "/Users/ashmitbhattarai/anaconda3/envs/perceptyx/lib/python3.6/site-packages/torch/nn/modules/module.py", line 541, in __call__
-    result = self.forward(*input, **kwargs)
-  File "/Users/ashmitbhattarai/anaconda3/envs/perceptyx/lib/python3.6/site-packages/transformers/modeling_bert.py", line 627, in forward
-    head_mask=head_mask)
-  File "/Users/ashmitbhattarai/anaconda3/envs/perceptyx/lib/python3.6/site-packages/torch/nn/modules/module.py", line 541, in __call__
-    result = self.forward(*input, **kwargs)
-  File "/Users/ashmitbhattarai/anaconda3/envs/perceptyx/lib/python3.6/site-packages/transformers/modeling_bert.py", line 348, in forward
-    layer_outputs = layer_module(hidden_states, attention_mask, head_mask[i])
-  File "/Users/ashmitbhattarai/anaconda3/envs/perceptyx/lib/python3.6/site-packages/torch/nn/modules/module.py", line 541, in __call__
-    result = self.forward(*input, **kwargs)
-  File "/Users/ashmitbhattarai/anaconda3/envs/perceptyx/lib/python3.6/site-packages/transformers/modeling_bert.py", line 328, in forward
-    intermediate_output = self.intermediate(attention_output)
-  File "/Users/ashmitbhattarai/anaconda3/envs/perceptyx/lib/python3.6/site-packages/torch/nn/modules/module.py", line 541, in __call__
-    result = self.forward(*input, **kwargs)
-  File "/Users/ashmitbhattarai/anaconda3/envs/perceptyx/lib/python3.6/site-packages/transformers/modeling_bert.py", line 299, in forward
-    hidden_states = self.dense(hidden_states)
-  File "/Users/ashmitbhattarai/anaconda3/envs/perceptyx/lib/python3.6/site-packages/torch/nn/modules/module.py", line 541, in __call__
-    result = self.forward(*input, **kwargs)
-  File "/Users/ashmitbhattarai/anaconda3/envs/perceptyx/lib/python3.6/site-packages/torch/nn/modules/linear.py", line 87, in forward
-    return F.linear(input, self.weight, self.bias)
-  File "/Users/ashmitbhattarai/anaconda3/envs/perceptyx/lib/python3.6/site-packages/torch/nn/functional.py", line 1372, in linear
-    output = input.matmul(weight.t())
-KeyboardInterrupt
+10/14/2019 07:01:37 - INFO - pytorch_pretrained_bert.modeling -   Weights of BertForSequenceClassification not initialized from pretrained model: ['classifier.weight', 'classifier.bias']
+10/14/2019 07:01:37 - INFO - pytorch_pretrained_bert.modeling -   Weights from pretrained model not used in BertForSequenceClassification: ['cls.predictions.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.dense.bias', 'cls.predictions.decoder.weight', 'cls.seq_relationship.weight', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.LayerNorm.bias']
+10/14/2019 07:03:53 - INFO - __main__ -   validation loss: 0.673843
+10/14/2019 07:06:06 - INFO - __main__ -   validation loss: 0.624250
+10/14/2019 07:08:19 - INFO - __main__ -   validation loss: 0.607495
+10/14/2019 07:10:33 - INFO - __main__ -   validation loss: 0.629533

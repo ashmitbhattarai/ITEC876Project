@@ -1,14 +1,4 @@
-10/14/2019 12:17:13 - INFO - transformers.tokenization_utils -   loading file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased-vocab.txt from cache at /Users/ashmitbhattarai/.cache/torch/transformers/26bc1ad6c0ac742e9b52263248f6d0f00068293b33709fae12320c0e35ccfbbb.542ce4285a40d23a559526243235df47c5f75c197f04f37d1a0c124c32c9a084
-10/14/2019 12:17:13 - INFO - __main__ -   ***** Running evaluation *****
-10/14/2019 12:17:13 - INFO - __main__ -     Num examples = 1120
-10/14/2019 12:17:13 - INFO - __main__ -     Batch size = 8
-Traceback (most recent call last):
-  File "../src/run_asc.py", line 286, in <module>
-    main()
-  File "../src/run_asc.py", line 283, in main
-    test(args)
-  File "../src/run_asc.py", line 183, in test
-    model = torch.load(os.path.join(args.output_dir, "model.pt") )
-  File "/Users/ashmitbhattarai/anaconda3/envs/perceptyx/lib/python3.6/site-packages/torch/serialization.py", line 419, in load
-    f = open(f, 'rb')
-FileNotFoundError: [Errno 2] No such file or directory: '../run/pt_asc/rest/5/model.pt'
+10/14/2019 08:04:29 - INFO - pytorch_pretrained_bert.tokenization -   loading vocabulary file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased-vocab.txt from cache at /home/ashmitbhattarai/.pytorch_pretrained_bert/26bc1ad6c0ac742e9b52263248f6d0f00068293b33709fae12320c0e35ccfbbb.542ce4285a40d23a559526243235df47c5f75c197f04f37d1a0c124c32c9a084
+10/14/2019 08:04:29 - INFO - __main__ -   ***** Running evaluation *****
+10/14/2019 08:04:29 - INFO - __main__ -     Num examples = 1120
+10/14/2019 08:04:29 - INFO - __main__ -     Batch size = 8
