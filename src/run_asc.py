@@ -33,6 +33,7 @@ from pytorch_pretrained_bert.optimization import BertAdam
 import absa_data_utils as data_utils
 from absa_data_utils import ABSATokenizer
 import modelconfig
+import math
 
 logging.basicConfig(format = '%(asctime)s - %(levelname)s - %(name)s -   %(message)s',
                     datefmt = '%m/%d/%Y %H:%M:%S',
@@ -52,7 +53,7 @@ def train(args):
     tokenizer = ABSATokenizer.from_pretrained('bert-base-uncased')
     # tokenizer = ABSATokenizer.from_pretrained(modelconfig.MODEL_ARCHIVE_MAP[args.bert_model])
     train_examples = processor.get_train_examples(args.data_dir)
-    num_train_steps = int(len(train_examples) / args.train_batch_size) * args.num_train_epochs
+    num_train_steps = math.ceil(len(train_examples) / args.train_batch_size) * args.num_train_epochs
 
     train_features = data_utils.convert_examples_to_features(
         train_examples, label_list, args.max_seq_length, tokenizer, "asc")
