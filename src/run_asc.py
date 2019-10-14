@@ -104,26 +104,34 @@ def train(args):
     optimizer_grouped_parameters = [
         {'params': [p for n, p in param_optimizer if not any(nd in n for nd in no_decay)], 'weight_decay': 0.01},
         {'params': [p for n, p in param_optimizer if any(nd in n for nd in no_decay)], 'weight_decay': 0.0}
-        ]x`
+        ]
     t_total = num_train_steps
+    #optimizer = AdamW(optimizer_grouped_parameters,
+    #                     lr=args.learning_rate,
+    #                     warmup=args.warmup_proportion,
+    #                     t_total=t_total)
     optimizer = AdamW(optimizer_grouped_parameters,
-                         lr=args.learning_rate,
-                         warmup=args.warmup_proportion,
-                         t_total=t_total)
+                    lr = args.learning_rate,
+                    )
+    scheduler = WarmupLinearSchedule(optimizer,warmup_steps=int(t_total * args.warmup_proportion), t_total=t_total)
+
 
     global_step = 0
     model.train()
     for _ in range(args.num_train_epochs):
         for step, batch in enumerate(train_dataloader):
-            batch = tuple(t.cuda() for t in batch)
+            #batch = tuple(t.cuda() for t in batch)
+            batch = tuple(t for t in batch)
             input_ids, segment_ids, input_mask, label_ids = batch
-            loss = model(input_ids, segment_ids, input_mask, label_ids)[0]
+            print (input_ids.shape,segment_ids.shape,input_mask.shape)
+            loss = model(input_ids, segment_ids, input_mask, labels=label_ids)[0]
             loss.backward()
 
             lr_this_step = args.learning_rate * warmup_linear(global_step/t_total, args.warmup_proportion)
             for param_group in optimizer.param_groups:
                 param_group['lr'] = lr_this_step
             optimizer.step()
+            scheduler.step()
             optimizer.zero_grad()
             global_step += 1
             #>>>> perform validation at the end of each epoch .
@@ -155,7 +163,8 @@ def train(args):
 def test(args):  # Load a trained model that you have fine-tuned (we assume evaluate on cpu)    
     processor = data_utils.AscProcessor()
     label_list = processor.get_labels()
-    tokenizer = BertTokenizer.from_pretrained(modelconfig.MODEL_ARCHIVE_MAP[args.bert_model])
+    tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+    #tokenizer = BertTokenizer.from_pretrained(modelconfig.MODEL_ARCHIVE_MAP[args.bert_model])
     eval_examples = processor.get_test_examples(args.data_dir)
     eval_features = data_utils.convert_examples_to_features(eval_examples, label_list, args.max_seq_length, tokenizer, "asc")
 
@@ -178,7 +187,8 @@ def test(args):  # Load a trained model that you have fine-tuned (we assume eval
     full_logits=[]
     full_label_ids=[]
     for step, batch in enumerate(eval_dataloader):
-        batch = tuple(t.cuda() for t in batch)
+        batch = tuple(t for t in batch)
+        #batch = tuple(t.cuda() for t in batch)
         input_ids, segment_ids, input_mask, label_ids = batch
         
         with torch.no_grad():
