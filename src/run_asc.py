@@ -96,7 +96,7 @@ def train(args):
 
     model = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels = len(label_list) )
     # model = BertForSequenceClassification.from_pretrained(modelconfig.MODEL_ARCHIVE_MAP[args.bert_model], num_labels = len(label_list) )
-    #model.cuda()
+    model.cuda()
     # Prepare optimizer
     param_optimizer = [(k, v) for k, v in model.named_parameters() if v.requires_grad==True]
     param_optimizer = [n for n in param_optimizer if 'pooler' not in n[0]]
@@ -120,10 +120,10 @@ def train(args):
     model.train()
     for _ in range(args.num_train_epochs):
         for step, batch in enumerate(train_dataloader):
-            #batch = tuple(t.cuda() for t in batch)
-            batch = tuple(t for t in batch)
+            batch = tuple(t.cuda() for t in batch)
+            #batch = tuple(t for t in batch)
             input_ids, segment_ids, input_mask, label_ids = batch
-            print (input_ids.shape,segment_ids.shape,input_mask.shape)
+            #print (input_ids.shape,segment_ids.shape,input_mask.shape)
             loss = model(input_ids, segment_ids, input_mask, labels=label_ids)[0]
             loss.backward()
 
@@ -181,14 +181,14 @@ def test(args):  # Load a trained model that you have fine-tuned (we assume eval
     eval_dataloader = DataLoader(eval_data, sampler=eval_sampler, batch_size=args.eval_batch_size)
 
     model = torch.load(os.path.join(args.output_dir, "model.pt") )
-    #model.cuda()
+    model.cuda()
     model.eval()
     
     full_logits=[]
     full_label_ids=[]
     for step, batch in enumerate(eval_dataloader):
         batch = tuple(t for t in batch)
-        #batch = tuple(t.cuda() for t in batch)
+        batch = tuple(t.cuda() for t in batch)
         input_ids, segment_ids, input_mask, label_ids = batch
         
         with torch.no_grad():
