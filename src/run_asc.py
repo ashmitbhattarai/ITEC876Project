@@ -275,7 +275,7 @@ def main():
     random.seed(args.seed)
     np.random.seed(args.seed)
     torch.manual_seed(args.seed)
-    os.makedirs(args.output_dir, exist_ok=True)
+    os.makedirs(args.output_dir)
 
     if args.do_train:
         train(args)
