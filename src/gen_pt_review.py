@@ -400,7 +400,8 @@ def main():
     random.seed(args.random_seed)
     np.random.seed(args.random_seed)
     
-    tokenizer = tokenization.BertTokenizer.from_pretrained(modelconfig.MODEL_ARCHIVE_MAP[args.bert_model]) 
+    #tokenizer = tokenization.BertTokenizer.from_pretrained(modelconfig.MODEL_ARCHIVE_MAP[args.bert_model]) 
+    tokenizer = tokenization.BertTokenizer.from_pretrained('bert-base-uncased') 
     rng = random.Random(args.random_seed)
     
     instances = create_training_instances(

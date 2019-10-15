@@ -37,7 +37,8 @@ logger = logging.getLogger(__name__)
 
 def gen(args):
 
-    tokenizer = BertTokenizer.from_pretrained(modelconfig.MODEL_ARCHIVE_MAP[args.bert_model] )
+    #tokenizer = BertTokenizer.from_pretrained(modelconfig.MODEL_ARCHIVE_MAP[args.bert_model] )
+    tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 
     train_examples = data_utils.read_squad_examples(os.path.join(args.input_dir, "train.json"), is_training=True)
     
