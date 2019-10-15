@@ -1,2 +1,4 @@
 pt_model/* filter=lfs diff=lfs merge=lfs -text
 *.npz filter=lfs diff=lfs merge=lfs -text
+domain_corpus/rest/data.npz filter=lfs diff=lfs merge=lfs -text
+domain_corpus/laptop/data.npz filter=lfs diff=lfs merge=lfs -text
