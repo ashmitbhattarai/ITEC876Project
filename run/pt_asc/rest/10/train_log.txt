@@ -1,15 +1,15 @@
-10/14/2019 23:06:49 - INFO - pytorch_pretrained_bert.tokenization -   loading vocabulary file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased-vocab.txt from cache at /home/ashmitbhattarai/.pytorch_pretrained_bert/26bc1ad6c0ac742e9b52263248f6d0f00068293b33709fae12320c0e35ccfbbb.542ce4285a40d23a559526243235df47c5f75c197f04f37d1a0c124c32c9a084
-10/14/2019 23:06:50 - INFO - __main__ -   ***** Running training *****
-10/14/2019 23:06:50 - INFO - __main__ -     Num examples = 3452
-10/14/2019 23:06:50 - INFO - __main__ -     Batch size = 32
-10/14/2019 23:06:50 - INFO - __main__ -     Num steps = 432
-10/14/2019 23:06:50 - INFO - __main__ -   ***** Running validations *****
-10/14/2019 23:06:50 - INFO - __main__ -     Num orig examples = 150
-10/14/2019 23:06:50 - INFO - __main__ -     Num split examples = 150
-10/14/2019 23:06:50 - INFO - __main__ -     Batch size = 32
-10/14/2019 23:06:51 - INFO - pytorch_pretrained_bert.modeling -   loading archive file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased.tar.gz from cache at /home/ashmitbhattarai/.pytorch_pretrained_bert/9c41111e2de84547a463fd39217199738d1e3deb72d4fec4399e6e241983c6f0.ae3cef932725ca7a30cdcb93fc6e09150a55e2a130ec7af63975a16c153ae2ba
-10/14/2019 23:06:51 - INFO - pytorch_pretrained_bert.modeling -   extracting archive file /home/ashmitbhattarai/.pytorch_pretrained_bert/9c41111e2de84547a463fd39217199738d1e3deb72d4fec4399e6e241983c6f0.ae3cef932725ca7a30cdcb93fc6e09150a55e2a130ec7af63975a16c153ae2ba to temp dir /tmp/tmply2wmdka
-10/14/2019 23:06:55 - INFO - pytorch_pretrained_bert.modeling -   Model config {
+11/03/2019 07:34:04 - INFO - pytorch_pretrained_bert.tokenization -   loading vocabulary file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased-vocab.txt from cache at /home/ashmitbhattarai/.pytorch_pretrained_bert/26bc1ad6c0ac742e9b52263248f6d0f00068293b33709fae12320c0e35ccfbbb.542ce4285a40d23a559526243235df47c5f75c197f04f37d1a0c124c32c9a084
+11/03/2019 07:34:04 - INFO - __main__ -   ***** Running training *****
+11/03/2019 07:34:04 - INFO - __main__ -     Num examples = 937
+11/03/2019 07:34:04 - INFO - __main__ -     Batch size = 32
+11/03/2019 07:34:04 - INFO - __main__ -     Num steps = 120
+11/03/2019 07:34:06 - INFO - __main__ -   ***** Running validations *****
+11/03/2019 07:34:06 - INFO - __main__ -     Num orig examples = 5311
+11/03/2019 07:34:06 - INFO - __main__ -     Num split examples = 5311
+11/03/2019 07:34:06 - INFO - __main__ -     Batch size = 32
+11/03/2019 07:34:06 - INFO - pytorch_pretrained_bert.modeling -   loading archive file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased.tar.gz from cache at /home/ashmitbhattarai/.pytorch_pretrained_bert/9c41111e2de84547a463fd39217199738d1e3deb72d4fec4399e6e241983c6f0.ae3cef932725ca7a30cdcb93fc6e09150a55e2a130ec7af63975a16c153ae2ba
+11/03/2019 07:34:06 - INFO - pytorch_pretrained_bert.modeling -   extracting archive file /home/ashmitbhattarai/.pytorch_pretrained_bert/9c41111e2de84547a463fd39217199738d1e3deb72d4fec4399e6e241983c6f0.ae3cef932725ca7a30cdcb93fc6e09150a55e2a130ec7af63975a16c153ae2ba to temp dir /tmp/tmpf4_9mpvf
+11/03/2019 07:34:10 - INFO - pytorch_pretrained_bert.modeling -   Model config {
   "attention_probs_dropout_prob": 0.1,
   "hidden_act": "gelu",
   "hidden_dropout_prob": 0.1,
@@ -23,9 +23,9 @@
   "vocab_size": 30522
 }
 
-10/14/2019 23:07:00 - INFO - pytorch_pretrained_bert.modeling -   Weights of BertForSequenceClassification not initialized from pretrained model: ['classifier.weight', 'classifier.bias']
-10/14/2019 23:07:00 - INFO - pytorch_pretrained_bert.modeling -   Weights from pretrained model not used in BertForSequenceClassification: ['cls.predictions.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.dense.bias', 'cls.predictions.decoder.weight', 'cls.seq_relationship.weight', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.LayerNorm.bias']
-10/14/2019 23:08:32 - INFO - __main__ -   validation loss: 0.809787
-10/14/2019 23:10:04 - INFO - __main__ -   validation loss: 0.639595
-10/14/2019 23:11:36 - INFO - __main__ -   validation loss: 0.638037
-10/14/2019 23:13:08 - INFO - __main__ -   validation loss: 0.626760
+11/03/2019 07:34:13 - INFO - pytorch_pretrained_bert.modeling -   Weights of BertForSequenceClassification not initialized from pretrained model: ['classifier.weight', 'classifier.bias']
+11/03/2019 07:34:13 - INFO - pytorch_pretrained_bert.modeling -   Weights from pretrained model not used in BertForSequenceClassification: ['cls.predictions.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.dense.bias', 'cls.predictions.decoder.weight', 'cls.seq_relationship.weight', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.LayerNorm.bias']
+11/03/2019 07:35:21 - INFO - __main__ -   validation loss: 0.991212
+11/03/2019 07:36:28 - INFO - __main__ -   validation loss: 0.822486
+11/03/2019 07:37:36 - INFO - __main__ -   validation loss: 0.799290
+11/03/2019 07:38:44 - INFO - __main__ -   validation loss: 0.794683
