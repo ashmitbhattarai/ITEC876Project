@@ -12,6 +12,11 @@ def read_file(folderpath="../target_data"):
     '''
         reads the file from target tweet do
     '''
+    sentiment_map = {
+        "1":"positive",
+        "0":"neutral",
+        "-1":"negative"
+    }
     destination = "../asc/target_data"
     word_list = []
     intent_counter = 0
@@ -19,6 +24,8 @@ def read_file(folderpath="../target_data"):
 
     for filetuple in os.walk(folderpath):
         for filename in filetuple[-1]:
+            if "readme" in filename:
+                continue
             sent_list = []
             filepath = os.path.join(folderpath, filename)
             tweet_data = open(filepath, "r+").read().splitlines()
@@ -31,7 +38,7 @@ def read_file(folderpath="../target_data"):
                 entity = tweet_data[sent_index+1]
                 sentiment = tweet_data[sent_index+2]
 
-                sent_dict["polarity"] = sentiment
+                sent_dict["polarity"] = sentiment_map[sentiment]
                 sent_dict["term"] = entity
                 sent_dict["id"] = sent_id
                 sent_dict["sentence"] = sent
@@ -59,4 +66,4 @@ def read_file(folderpath="../target_data"):
                 json.dump(test_chunk, test_file, indent=4)
 
 
-# read_file()
+read_file()
