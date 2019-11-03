@@ -41,7 +41,7 @@ def read_file(folderpath="../target_data"):
                 sent_dict["polarity"] = sentiment_map[sentiment]
                 sent_dict["term"] = entity
                 sent_dict["id"] = sent_id
-                sent_dict["sentence"] = sent
+                sent_dict["sentence"] = sent.replace("$T$", entity)
                 sent_list.append(sent_dict)
             random_seq = np.random.permutation(sent_list)
             sent_list = random_seq.tolist()
