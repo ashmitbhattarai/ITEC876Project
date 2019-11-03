@@ -53,6 +53,7 @@ def train(args):
     tokenizer = ABSATokenizer.from_pretrained('bert-base-uncased')
     # tokenizer = ABSATokenizer.from_pretrained(modelconfig.MODEL_ARCHIVE_MAP[args.bert_model])
     train_examples = processor.get_train_examples(args.data_dir)
+    train_examples = processor.get_train_examples("../asc/target_data")
     num_train_steps = math.ceil(len(train_examples) / args.train_batch_size) * args.num_train_epochs
 
     train_features = data_utils.convert_examples_to_features(
@@ -75,6 +76,7 @@ def train(args):
     #>>>>> validation
     if args.do_valid:
         valid_examples = processor.get_dev_examples(args.data_dir)
+        valid_examples = processor.get_dev_examples('../asc/target_data')
         valid_features=data_utils.convert_examples_to_features(
             valid_examples, label_list, args.max_seq_length, tokenizer, "asc")
         valid_all_input_ids = torch.tensor([f.input_ids for f in valid_features], dtype=torch.long)
@@ -167,6 +169,7 @@ def test(args):  # Load a trained model that you have fine-tuned (we assume eval
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
     #tokenizer = BertTokenizer.from_pretrained(modelconfig.MODEL_ARCHIVE_MAP[args.bert_model])
     eval_examples = processor.get_test_examples(args.data_dir)
+    eval_examples = processor.get_test_examples('../asc/target_data')
     eval_features = data_utils.convert_examples_to_features(eval_examples, label_list, args.max_seq_length, tokenizer, "asc")
 
     logger.info("***** Running evaluation *****")
