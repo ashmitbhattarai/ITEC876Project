@@ -13,17 +13,29 @@ def read_file(folderpath="../target_data"):
         reads the file from target tweet do
     '''
     destination = "../asc/target_data"
+    word_list = []
+    intent_counter = 0
+    sent_counter = 0
+
     for filetuple in os.walk(folderpath):
         for filename in filetuple[-1]:
             sent_list = []
             filepath = os.path.join(folderpath, filename)
             tweet_data = open(filepath, "r+").read().splitlines()
             for idx, sent in enumerate(tweet_data[::3]):
+                sent_dict = {}
+                sent_counter += 1
+                sent_id = str(sent_counter)
+
                 sent_index = tweet_data.index(sent)
                 entity = tweet_data[sent_index+1]
                 sentiment = tweet_data[sent_index+2]
-                
-                sent_list.append(sent)
+
+                sent_dict["polarity"] = sentiment
+                sent_dict["term"] = entity
+                sent_dict["id"] = sent_id
+                sent_dict["sentence"] = sent
+                sent_list.append(sent_dict)
             random_seq = np.random.permutation(sent_list)
             sent_list = random_seq.tolist()
             if "train" in filename:
@@ -31,6 +43,9 @@ def read_file(folderpath="../target_data"):
 
                 train_chunk = sent_list[:train_test_split]
                 dev_chunk = sent_list[train_test_split:]
+
+                train_chunk = dict((each["id"], each) for each in train_chunk)
+                dev_chunk = dict((each["id"], each) for each in dev_chunk)
 
                 train_file = open(os.path.join(destination, 'train.json'), "w")
                 dev_file = open(os.path.join(destination, 'dev.json'), "w")
@@ -40,7 +55,8 @@ def read_file(folderpath="../target_data"):
 
             elif "test" in filename:
                 test_file = open(os.path.join(destination, 'test.json'), "w")
-                json.dump(sent_list, test_file, indent=4)
+                test_chunk = dict((each["id"], each) for each in sent_list)
+                json.dump(test_chunk, test_file, indent=4)
 
 
 # read_file()
