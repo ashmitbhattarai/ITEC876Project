@@ -25,14 +25,15 @@ import torch
 from torch.utils.data import TensorDataset, DataLoader, RandomSampler, SequentialSampler
 
 from pytorch_pretrained_bert.tokenization import BertTokenizer
-from pytorch_pretrained_bert.modeling import BertModel, PreTrainedBertModel, BertPreTrainingHeads
+from pytorch_pretrained_bert.modeling import BertModel, BertPreTrainingHeads
+from pytorch_pretrained_bert.modeling import BertPreTrainedModel
 
 from pytorch_pretrained_bert.optimization import BertAdam
 
 import modelconfig
 
 
-class BertForMTPostTraining(PreTrainedBertModel):
+class BertForMTPostTraining(BertPreTrainedModel):
     def __init__(self, config):
         super(BertForMTPostTraining, self).__init__(config)
         self.bert = BertModel(config)
@@ -124,8 +125,8 @@ def train(args):
     squad_train_dataloader = DataLoader(squad_train_data, sampler=RandomSampler(squad_train_data), batch_size=args.train_batch_size , drop_last=True)
 
     #we do not have any valiation for pretuning
-    model = BertForMTPostTraining.from_pretrained(modelconfig.MODEL_ARCHIVE_MAP[args.bert_model] )
-    
+    #model = BertForMTPostTraining.from_pretrained(modelconfig.MODEL_ARCHIVE_MAP[args.bert_model])    
+    model = BertForMTPostTraining.from_pretrained('bert-base-uncased')	    
     if args.fp16:
         model.half()
     model.cuda()
@@ -142,7 +143,7 @@ def train(args):
         
     if args.fp16:
         try:
-            from apex.optimizers import FP16_Optimizer
+            from apex.fp16_utils import FP16_Optimizer
             from apex.optimizers import FusedAdam
         except ImportError:
             raise ImportError("Please install apex from https://www.github.com/nvidia/apex to use distributed and fp16 training.")
@@ -150,7 +151,7 @@ def train(args):
         optimizer = FusedAdam(optimizer_grouped_parameters,
                               lr=args.learning_rate,
                               bias_correction=False,
-                              max_grad_norm=1.0)
+                              )
 
         if args.loss_scale == 0:
             optimizer = FP16_Optimizer(optimizer, dynamic_loss_scale=True)

@@ -1,0 +1,14 @@
+11/04/2019 21:39:00 - INFO - pytorch_pretrained_bert.tokenization -   loading vocabulary file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-uncased-vocab.txt from cache at /home/ashmitbhattarai/.pytorch_pretrained_bert/26bc1ad6c0ac742e9b52263248f6d0f00068293b33709fae12320c0e35ccfbbb.542ce4285a40d23a559526243235df47c5f75c197f04f37d1a0c124c32c9a084
+11/04/2019 21:43:04 - INFO - __main__ -   ***** Running training *****
+11/04/2019 21:43:04 - INFO - __main__ -     Num orig examples = 87599
+11/04/2019 21:43:04 - INFO - __main__ -     Num split examples = 88482
+Traceback (most recent call last):
+  File "../src/gen_pt_squad.py", line 140, in <module>
+    main()
+  File "../src/gen_pt_squad.py", line 137, in main
+    gen(args)
+  File "../src/gen_pt_squad.py", line 65, in gen
+    valid_examples=data_utils.read_squad_examples(os.path.join(args.input_dir,"dev.json"), is_training=True)
+  File "/home/ashmitbhattarai/ITEC876Project/src/squad_data_utils.py", line 85, in read_squad_examples
+    with open(input_file, "r", encoding='utf-8') as reader:
+FileNotFoundError: [Errno 2] No such file or directory: '../squad/dev.json'

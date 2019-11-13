@@ -2,3 +2,7 @@ pt_model/* filter=lfs diff=lfs merge=lfs -text
 *.npz filter=lfs diff=lfs merge=lfs -text
 domain_corpus/rest/data.npz filter=lfs diff=lfs merge=lfs -text
 domain_corpus/laptop/data.npz filter=lfs diff=lfs merge=lfs -text
+squad/data.npz filter=lfs diff=lfs merge=lfs -text
+asc/sentihood/training.1600000.processed.noemoticon.csv filter=lfs diff=lfs merge=lfs -text
+asc/sentihood/testdata.manual.2009.06.14.csv filter=lfs diff=lfs merge=lfs -text
+domain_corpus/raw/rest.txt filter=lfs diff=lfs merge=lfs -text
